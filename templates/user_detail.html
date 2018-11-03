@@ -1,0 +1,23 @@
+{% extends 'keetab_app/base.html' %}
+{% block body_block %}
+<h3 >{{ user.first_name }} {{user.last_name}}</h3>
+<br>
+<div class="jumbotron">
+<h4>Books purchased by this user:</h4>
+{% for books in user.boughtbooks.all %}
+<br>
+    <p>Title : {{ books.book.title }}</p>
+    <p>Price : {{ books.book.price }}</p>
+    <p>Purchased date: {{books.purchased_date}}</p>
+{% empty %}
+    <p>No books purchased.</p>
+{% endfor %}
+<br>
+  <h4>Total  books : {{ user.boughtbooks.count }}</h4>
+  <h4>Cheapest book Price : {{ user.minimum_price}}</h4>
+  <h4>Most Expensive book Price : {{user.maximum_price}} </h4>
+  <h4>Total price of the books : {{user.total_price}} </h4>
+  <h4>Average price of the books : {{user.average_price}} </h4>
+</div>
+
+{% endblock %}

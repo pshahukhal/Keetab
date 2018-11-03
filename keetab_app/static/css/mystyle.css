@@ -1,0 +1,30 @@
+header {
+  background-color: grey;
+  color: white;
+  font-size: 25px;
+  padding:10px 0 10px 0;
+  text-align: center;
+
+}
+
+.container{
+  min-height:500px;
+}
+
+.jumbotron p{
+   font-size: 14px; 
+}
+
+footer {
+   position: relative;
+   width:100%;
+   background-color: grey;
+   color: white;
+   text-align: center;
+   padding:10px 0 10px 0;
+}
+
+footer a{
+  font-size: 20px;
+  color:darkblue
+}

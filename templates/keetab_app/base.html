@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Keetab</title>
+    <!--bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+    <!-- data Tables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+
+    <!-- custom css  -->
+    <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
+  </head>
+  <body>
+    <header>
+    <p>Keetab <span class="fa fa-book"></span> </p>
+    </header>
+    <div class="container">
+    <div class="col-sm-3">
+      <ul class="nav nav-pills nav-stacked" >
+        <li><a href="{% url 'user_list' %}"> Home</a></li>
+        <li><a href="{% url 'book_list' %}"> Books</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+      </ul>
+    </div>
+      <div class="col-sm-9">
+        {% block body_block %}
+
+        {% endblock %}
+      </div>
+    </div>
+    <footer>
+      <p> © 2018 Keetab app</p>
+      <p>Follow us on social media </p>
+      <p>
+      <a href="#"><span class="fa fa-facebook"></span></a>
+      <a href="#"><span class="fa fa-twitter"></span></a>
+      <a href="#"><span class="fa fa-linkedin"></span></a>
+      <a href="#"><span class="fa fa-google-plus"></span></a>
+      <a href="#"><span class="fa fa-skype"></span></a>
+      </p>
+    </footer>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+    <script type="text/javascript">
+       $(document).ready(function() {
+           // dataTable for the  list of users
+       var datatable = $('#userlist').DataTable({
+           "lengthMenu": [[5,10, 25, 50, -1], [5,10, 25, 50, "All"]],
+           "processing": true,
+           "serverSide": true,
+           "ajax": "{% url 'user_list_json' %}"
+       });
+
+       $('#userlist tbody').on('click', 'tr', function () {
+        var data = datatable.row( this ).data();
+        window.location.href = "/user/" + (data[5]);
+        } );
+
+        // data Table for the list of books
+        var datatable2 = $('#booklist').DataTable({
+             "lengthMenu": [[5,10, 25, 50, -1], [5,10, 25, 50, "All"]],
+             "processing": true,
+             "serverSide": true,
+             "ajax": "{% url 'book_list_json' %}"
+         });
+
+       });
+
+    </script>
+  </body>
+
+</html>
